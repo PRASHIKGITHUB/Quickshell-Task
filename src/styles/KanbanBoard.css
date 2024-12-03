@@ -2,17 +2,19 @@
 .kanban-board {
     display: flex;
     gap: 20px;
+    justify-content: left;
     padding: 20px;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    /* overflow-x: auto; */
   }
   
   .kanban-column {
     background-color: transparent;
     border-radius: 3px;
     padding: 10px;
-    min-width: 300px;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
+    width: 360px;
+    /* max-height: calc(100vh - 100px); */
+    /* overflow-y: auto; */
   }
   
   .kanban-column h2 {
@@ -28,5 +30,19 @@
     text-align: center;
     font-size: 18px;
     color: #333;
+  }
+  .group-header{
+    display: flex;
+    justify-content:space-between;
+
+  }
+  .group-header-left{
+    display: flex;
+    flex-direction: row;
+  }
+  .group-header-left{
+    display: flex;
+    justify-content: center;
+
   }
   
