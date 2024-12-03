@@ -1,33 +1,25 @@
-// src/components/KanbanBoard.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Ticket from './Ticket';
 import '../styles/KanbanBoard.css';
-
-// Import Priority Images
 import highPriority from '../assets/icons_FEtask/highPriority.svg';
 import lowPriority from '../assets/icons_FEtask/lowPriority.svg';
 import mediumPriority from '../assets/icons_FEtask/mediumPriority.svg';
 import noPriority from '../assets/icons_FEtask/noPriority.svg';
-
-// Import Status Images
+import urgent from '../assets/icons_FEtask/urgent.svg'
 import inProgress from '../assets/icons_FEtask/inProgress.svg';
 import todoImage from '../assets/icons_FEtask/todo.svg';
 import backlogImage from '../assets/icons_FEtask/Backlog.svg';
 import doneImage from '../assets/icons_FEtask/Done.svg';
 import canceledImage from '../assets/icons_FEtask/Cancelled.svg';
-
-// Import Default User Image
-import defaultUser from '../assets/icons_FEtask/down.svg';
-
-// Import Additional Icons
+import defaultUser from '../assets/icons_FEtask/defaultUser.png';
 import addIcon from '../assets/icons_FEtask/add.svg';
 import threeDotMenu from '../assets/icons_FEtask/3 dot menu.svg';
 
-// Define image mappings
+
 const priorityImages = {
-    'Urgent': highPriority,
     'High': highPriority,
+    'Urgent': urgent,
     'Medium': mediumPriority,
     'Low': lowPriority,
     'No priority': noPriority,
@@ -43,7 +35,6 @@ const statusImages = {
 
 const userImages = {
     'default': defaultUser,
-    // Add specific user images if available
 };
 
 const KanbanBoard = ({ groupingOption, orderingOption }) => {
@@ -52,7 +43,7 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    // Define all possible statuses
+    
     const allStatuses = ['Todo', 'In progress', 'Backlog', 'Done', 'Canceled'];
 
     useEffect(() => {
@@ -73,7 +64,7 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
         fetchData();
     }, []);
 
-    // Helper functions
+    
     const getPriorityLabel = (priority) => {
         const labels = ['No priority', 'Low', 'Medium', 'High', 'Urgent'];
         return labels[priority] || 'Unknown';
@@ -83,7 +74,6 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
         const grouped = {};
 
         if (option === 'status') {
-            // Initialize all statuses with empty arrays
             allStatuses.forEach(status => {
                 grouped[status] = [];
             });
@@ -94,7 +84,6 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
             switch (option) {
                 case 'status':
                     key = ticket.status;
-                    // If the status from the ticket is not in allStatuses, add it to 'Others'
                     if (!allStatuses.includes(key)) {
                         key = 'Others';
                         if (!grouped[key]) {
@@ -154,7 +143,6 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
 
     const groupedTickets = processTickets();
 
-    // Function to get image based on grouping option and group key
     const getGroupImage = (groupKey) => {
         switch (groupingOption) {
             case 'status':
@@ -162,7 +150,6 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
             case 'priority':
                 return priorityImages[groupKey] || null;
             case 'user':
-                // If you have specific images for users, map them here. Otherwise, use default.
                 return userImages['default'];
             default:
                 return null;
@@ -187,20 +174,28 @@ const KanbanBoard = ({ groupingOption, orderingOption }) => {
                     <div key={groupKey} className="kanban-column">
                         <div className="group-header">
                             <div className="group-header-left">
-                                {groupImage && <img src={groupImage} alt={`${groupKey} Icon`} className="group-icon" />}
-                                <h2>{groupKey} ({ticketCount})</h2>
+                                {groupImage && <img style={{ height: "20px" }} src={groupImage} alt={`${groupKey} Icon`} className="group-icon" />}
+                                <h2>
+                                    <div className="center">
+                                        <p id='name' > {groupKey}</p>
+
+                                        <p style={{ fontWeight:"100", color:"#5e6c84",marginLeft:"10px"}} id='unique'> {ticketCount} </p>
+
+                                    </div>
+
+                                </h2>
                             </div>
                             <div className="group-header-right">
-                                <img src={addIcon} alt="Add Ticket" className="header-action-icon" />
-                                <img src={threeDotMenu} alt="More Options" className="header-action-icon" />
+                                <img style={{ height: "20px", marginRight: "10px" }} src={addIcon} alt="Add Ticket" className="header-action-icon" />
+                                <img style={{ marginRight: "15px" }} src={threeDotMenu} alt="More Options" className="header-action-icon" />
                             </div>
                         </div>
                         {ticketCount > 0 ? (
                             groupedTickets[groupKey].map((ticket) => (
-                                <Ticket key={ticket.id} ticket={ticket} users={users} groupingOption={groupingOption}/>
+                                <Ticket key={ticket.id} ticket={ticket} users={users} groupingOption={groupingOption} />
                             ))
                         ) : (
-                            <p className="no-tickets">No tickets</p>
+                            <p style={{fontFamily:"sans-serif"}} className="no-tickets">No Tasks</p>
                         )}
                     </div>
                 );

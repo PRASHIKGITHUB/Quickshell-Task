@@ -8,12 +8,13 @@ import todoImage from '../assets/icons_FEtask/todo.svg';
 import backlogImage from '../assets/icons_FEtask/Backlog.svg';
 import doneImage from '../assets/icons_FEtask/Done.svg';
 import canceledImage from '../assets/icons_FEtask/Cancelled.svg';
-import noPriority from '../assets/icons_FEtask/noPriority.svg'
-import greycircle from '../assets/icons_FEtask/greycircle.png'
-// Import Default Status Image (Optional)
-import defaultStatus from '../assets/icons_FEtask/add.svg'; // Ensure you have this image
 
-// Define a mapping from status labels to their corresponding images
+// Import Other Images
+import noPriority from '../assets/icons_FEtask/noPriority.svg';
+import greycircle from '../assets/icons_FEtask/greycircle.png';
+import defaultStatus from '../assets/icons_FEtask/add.svg';
+import defaultUser from '../assets/icons_FEtask/defaultUser.png';
+
 const statusImages = {
     'Todo': todoImage,
     'In progress': inProgress,
@@ -32,40 +33,36 @@ const Ticket = ({ ticket, users, groupingOption }) => {
 
     const priorityLabel = getPriorityLabel(ticket.priority);
 
-    // Get status label from the ticket
     const statusLabel = ticket.status;
-    const statusImage = statusImages[statusLabel] || defaultStatus; // Use default if status not found
+    const statusImage = statusImages[statusLabel] || defaultStatus;
 
     return (
         <div className="ticket">
-            {/* Display Ticket ID */}
             <h3 className="ticket-id">{ticket.id}</h3>
 
+            {/* Conditionally display defaultUser image based on groupingOption */}
+            {(groupingOption === 'status' || groupingOption === 'priority') && (
+                <img style={{height:"25px",width:"25px"}} src={defaultUser} alt="Assigned User" className="user-icon" />
+            )}
 
             <div className="middle">
-                {/* Conditionally display status image based on groupingOption */}
-
                 {(groupingOption === 'user' || groupingOption === 'priority') && statusImage && (
                     <div className="ticket-status">
-                        <img src={statusImage} alt={`${statusLabel} Status`} className="status-icon" />
+                        <img  src={statusImage} alt={`${statusLabel} Status`} className="status-icon" />
                     </div>
                 )}
 
-                {/* Display Ticket Title */}
                 <p className="ticket-title">{ticket.title}</p>
-
             </div>
 
-            {/* Display Tags */}
             <div className="bottom">
                 <div className="bottom-icon">
-                    <img src={noPriority} alt="" />
+                    <img src={noPriority} alt="No Priority" />
                 </div>
                 <div className="bottom-feature">
                     <div className="temp">
-                        <img style={{height:"11px"}} src={greycircle} alt="" />
+                        <img style={{ height: '11px' }} src={greycircle} alt="Tag Icon" />
                         <p>{ticket.tag.join(', ')}</p>
-
                     </div>
                 </div>
             </div>

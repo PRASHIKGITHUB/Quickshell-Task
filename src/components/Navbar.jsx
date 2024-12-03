@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import DisplayOptions from './DisplayOptions';
 import '../styles/Navbar.css';
@@ -44,9 +43,6 @@ const Navbar = ({ groupingOption, setGroupingOption, orderingOption, setOrdering
                         />
                     </div>
                 )}
-            </div>
-            <div className="navbar-right">
-                <h1>Kanban Board</h1>
             </div>
         </nav>
     );

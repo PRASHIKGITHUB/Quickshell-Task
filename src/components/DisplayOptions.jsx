@@ -1,4 +1,3 @@
-// src/components/DisplayOptions.jsx
 import React from 'react';
 import '../styles/DisplayOptions.css';
 
@@ -8,9 +7,11 @@ const DisplayOptions = ({ groupingOption, setGroupingOption, orderingOption, set
       <div className="option-group">
         <h3> Grouping</h3>
         <select value={groupingOption} onChange={(e) => setGroupingOption(e.target.value)}>
-          <option value="status">Status</option>
-          <option value="user"> User</option>
-          <option value="priority"> Priority</option>
+          <option value="status">
+             <p>Status</p>
+          </option>
+          <option value="user"> <p>User</p></option>
+          <option value="priority"> <p>Priority</p></option>
         </select>
       </div>
       <div className="option-group">
