@@ -1,0 +1,23 @@
+/* src/styles/Ticket.css */
+.ticket {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #E7E7E6;
+    width: 400px;
+    box-shadow: 4px 4px 5px E7E7E6;
+  }
+  
+  .ticket-title {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #172b4d;
+  }
+  
+  .ticket p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #5e6c84;
+  }
+  

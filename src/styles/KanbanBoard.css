@@ -1,0 +1,32 @@
+/* src/styles/KanbanBoard.css */
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  
+  .kanban-column {
+    background-color: transparent;
+    border-radius: 3px;
+    padding: 10px;
+    min-width: 300px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  
+  .kanban-column h2 {
+    text-align: center;
+    color: #333;
+    /* background-color: white; */
+    margin-bottom: 10px;
+  }
+  
+  .kanban-loading,
+  .kanban-error {
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+  }
+  
